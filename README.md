@@ -52,14 +52,49 @@ bestimmten Parkplatzbetreiber.
 
 Pro Parkplatz-Sektion (laut API-Antwort, z.B. `P1+2`, `P3`) wird ein Sensor
 `sensor.freie_plaetze_<sektion>` mit dem aktuellen Wert für freie Plätze
-angelegt. Zusätzliche Attribute: `long_name`, `occupied_spots`, `measured_at`.
+angelegt. Zusätzliche Attribute: `short_name`, `long_name`, `occupied_spots`,
+`measured_at`.
 
 Das Abfrageintervall startet bei 30 Sekunden und übernimmt danach den von
 der API empfohlenen Wert (`polling_seconds` in der Antwort).
 
+## Lovelace Card
+
+Die Integration bringt eine eigene Custom Card (`pcount-card`) mit, die
+optisch an die offizielle p-count Mobile/WebApp angelehnt ist: Kopfzeile mit
+Carpark-Name und „Datenstand"-Zeitstempel, optionalem Firmenlogo-Banner und
+einer Zeile pro Sektion mit rot/grün-Balken für belegte/freie Plätze.
+
+Die Card wird automatisch als Frontend-Ressource registriert (kein manueller
+Eintrag unter Einstellungen → Dashboards → Ressourcen nötig).
+
+```yaml
+type: custom:pcount-card
+title: Musterfirma 1
+logo_url: https://example.com/logo.png
+entities:
+  - sensor.freie_plaetze_p1_2
+  - sensor.freie_plaetze_p3
+```
+
+| Option | Pflicht | Beschreibung |
+|---|---|---|
+| `entities` | ja | Liste der Freie-Plätze-Sensor-Entity-IDs, in Anzeigereihenfolge |
+| `title` | nein | Überschrift der Card, Standard „Parkplatz-Belegung" |
+| `logo_url` | nein | URL zu einem Firmenlogo, wird als Banner unter der Kopfzeile angezeigt (analog zum Logo-Banner der p-count App) |
+
+Farben lassen sich per CSS-Variablen auf Dashboard-/Theme-Ebene anpassen:
+`--pcount-card-occupied-color`, `--pcount-card-free-color`,
+`--pcount-card-label-color`.
+
+Aktuell nur per YAML/UI-Code-Editor konfigurierbar, noch kein grafischer
+Card-Editor (siehe Roadmap).
+
 ## Roadmap
 
 - [x] Grundgerüst: Config Flow, Coordinator, Sensor-Entities
+- [x] Lovelace Card (`pcount-card`), angelehnt an die p-count App
+- [ ] Grafischer Card-Editor (`getConfigElement`)
 - [ ] Tests (pytest-homeassistant-custom-component)
 - [ ] Aufnahme in den offiziellen HACS-Default-Store
 - [ ] iOS-App mit CarPlay-Integration als eigenständiges Folgeprojekt

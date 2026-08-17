@@ -72,6 +72,7 @@ class PCountFreeSpotsSensor(CoordinatorEntity[PCountCoordinator], SensorEntity):
         if not section:
             return {}
         return {
+            "short_name": section.short_name,
             "long_name": section.long_name,
             "occupied_spots": section.occupied_spots,
             "measured_at": self.coordinator.data.measured_at,

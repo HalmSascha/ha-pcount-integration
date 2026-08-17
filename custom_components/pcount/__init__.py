@@ -1,16 +1,48 @@
 """The p-count parking occupation integration."""
 from __future__ import annotations
 
+import logging
+from pathlib import Path
+
+from homeassistant.components.frontend import add_extra_js_url
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_HOST, CONF_PASSWORD, CONF_USERNAME, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.typing import ConfigType
 
 from .api import PCountApiClient
 from .const import CONF_CARPARK_ID, DOMAIN
 from .coordinator import PCountCoordinator
 
+_LOGGER = logging.getLogger(__name__)
+
 PLATFORMS: list[Platform] = [Platform.SENSOR]
+
+# Served under /pcount/pcount-card.js regardless of how many carparks are
+# configured - registered once in async_setup, not per config entry.
+CARD_URL_PATH = f"/{DOMAIN}/pcount-card.js"
+CARD_VERSION = "1"  # bump to bust the frontend cache whenever the card changes
+
+
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Register the pcount-card Lovelace card as a frontend resource."""
+    js_path = Path(__file__).parent / "www" / "pcount-card.js"
+
+    try:
+        # Home Assistant >= 2024.7 (async, avoids executor hop).
+        from homeassistant.components.http import StaticPathConfig
+
+        await hass.http.async_register_static_paths(
+            [StaticPathConfig(CARD_URL_PATH, str(js_path), True)]
+        )
+    except ImportError:
+        # Home Assistant < 2024.7 fallback (sync, deprecated in newer core
+        # but still functional).
+        hass.http.register_static_path(CARD_URL_PATH, str(js_path), True)
+
+    add_extra_js_url(hass, f"{CARD_URL_PATH}?v={CARD_VERSION}")
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
