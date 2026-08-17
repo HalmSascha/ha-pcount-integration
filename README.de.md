@@ -131,6 +131,13 @@ Dienste auf. Auf älteren HA-Versionen bleibt der Icon-Platz einfach leer,
 die Integration funktioniert trotzdem. `icon.png` im Repo-Root ist dasselbe
 Bild, genutzt von HACS/GitHub als Repository-Vorschaubild.
 
+## KI-unterstützte Entwicklung
+
+Im Sinne voller Transparenz: Dieses Projekt wurde mit Unterstützung von KI
+entwickelt – Claude (Anthropic), über den Claude-Code-Agenten – wobei
+Anforderungen, Architekturentscheidungen, Code und Dokumentation bei jedem
+Schritt vom Maintainer gesteuert und geprüft wurden.
+
 ## Roadmap
 
 - [x] Grundgerüst: Config Flow, Coordinator, Sensor-Entities

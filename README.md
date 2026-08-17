@@ -129,6 +129,13 @@ cores the icon slot is simply blank; the integration still works.
 `icon.png` at the repo root is the same image, used by HACS/GitHub for the
 repository thumbnail.
 
+## AI-Assisted Development
+
+In the interest of full transparency: this project was developed with the
+assistance of AI – Claude (Anthropic), via the Claude Code agent – directed
+and reviewed by the maintainer at every step: requirements, architecture
+decisions, code, and documentation.
+
 ## Roadmap
 
 - [x] Foundation: config flow, coordinator, sensor entities
