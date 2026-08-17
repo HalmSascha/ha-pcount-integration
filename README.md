@@ -1,5 +1,7 @@
 🇩🇪 [Deutsche Version](README.de.md)
 
+<img src="icon.png" alt="p-count Parking Occupancy logo" width="96" height="96">
+
 # p-count Parking Occupancy for Home Assistant
 
 Custom integration for Home Assistant that exposes parking occupancy data
@@ -112,6 +114,17 @@ Colors can be customized per dashboard/theme via CSS variables:
 `--pcount-card-occupied-color`, `--pcount-card-free-color`,
 `--pcount-card-label-color`.
 
+## Logo / Brand Icon
+
+`icon.png` (repo root) is a self-designed, license-free logo – not an
+official p-count.de trademark. HACS picks it up automatically as a
+fallback thumbnail for custom repositories. The official Settings → Devices
+& Services integration list only shows icons sourced from
+[home-assistant/brands](https://github.com/home-assistant/brands) – the
+`brands/custom_integrations/pcount/` folder in this repo is pre-formatted
+for that submission (icon.png, icon@2x.png, logo.png, logo@2x.png), planned
+alongside the HACS default store submission below.
+
 ## Roadmap
 
 - [x] Foundation: config flow, coordinator, sensor entities
@@ -119,7 +132,9 @@ Colors can be customized per dashboard/theme via CSS variables:
 - [x] Visual card editor (`getConfigElement`)
 - [x] Bilingual README (DE/EN)
 - [x] Localize sensor entity names (entity translations)
+- [x] Logo / brand icon (self-designed, HACS fallback + brands submission assets)
 - [ ] Tests (pytest-homeassistant-custom-component)
+- [ ] Submit logo to home-assistant/brands
 - [ ] Submission to the official HACS default store
 - [ ] iOS app with CarPlay integration as a separate follow-up project
 

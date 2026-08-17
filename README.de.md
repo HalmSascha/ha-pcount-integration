@@ -1,5 +1,7 @@
 🇬🇧 [English version](README.md)
 
+<img src="icon.png" alt="p-count Parkplatz-Belegung Logo" width="96" height="96">
+
 # p-count Parkplatz-Belegung für Home Assistant
 
 Custom Integration für Home Assistant, die Parkplatz-Belegungsdaten von
@@ -114,6 +116,17 @@ Farben lassen sich per CSS-Variablen auf Dashboard-/Theme-Ebene anpassen:
 `--pcount-card-occupied-color`, `--pcount-card-free-color`,
 `--pcount-card-label-color`.
 
+## Logo / Markenzeichen
+
+`icon.png` (Repo-Root) ist ein selbst gestaltetes, lizenzfreies Logo – kein
+offizielles p-count.de-Markenzeichen. HACS nutzt es automatisch als
+Vorschaubild für benutzerdefinierte Repositories. Die offizielle
+Integrations-Liste unter Einstellungen → Geräte & Dienste zeigt Icons nur
+aus [home-assistant/brands](https://github.com/home-assistant/brands) – der
+Ordner `brands/custom_integrations/pcount/` in diesem Repo ist bereits für
+diese Einreichung vorbereitet (icon.png, icon@2x.png, logo.png, logo@2x.png),
+geplant zusammen mit dem HACS-Store-Antrag weiter unten.
+
 ## Roadmap
 
 - [x] Grundgerüst: Config Flow, Coordinator, Sensor-Entities
@@ -121,7 +134,9 @@ Farben lassen sich per CSS-Variablen auf Dashboard-/Theme-Ebene anpassen:
 - [x] Grafischer Card-Editor (`getConfigElement`)
 - [x] Zweisprachige README (DE/EN)
 - [x] Sensor-Entity-Namen lokalisieren (Entity-Übersetzungen)
+- [x] Logo / Markenzeichen (selbst gestaltet, HACS-Fallback + Brands-Assets)
 - [ ] Tests (pytest-homeassistant-custom-component)
+- [ ] Logo bei home-assistant/brands einreichen
 - [ ] Aufnahme in den offiziellen HACS-Default-Store
 - [ ] iOS-App mit CarPlay-Integration als eigenständiges Folgeprojekt
 

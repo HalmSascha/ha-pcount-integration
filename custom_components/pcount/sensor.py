@@ -37,9 +37,13 @@ class PCountFreeSpotsSensor(CoordinatorEntity[PCountCoordinator], SensorEntity):
     # entity.sensor.free_spots) instead of a hardcoded name, so the sensor
     # name follows each user's Home Assistant language rather than always
     # being German.
+    # No native_unit_of_measurement on purpose: "spots" showed up next to the
+    # value regardless of language (e.g. "247 spots" even with a German
+    # entity name), and there is no clean way to translate a unit string the
+    # same way entity names are translated. The section name already makes
+    # the sensor self-explanatory, so it's left unitless.
     _attr_has_entity_name = True
     _attr_translation_key = "free_spots"
-    _attr_native_unit_of_measurement = "spots"
     _attr_icon = "mdi:parking"
 
     def __init__(
