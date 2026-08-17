@@ -22,7 +22,7 @@ PLATFORMS: list[Platform] = [Platform.SENSOR]
 # Served under /pcount/pcount-card.js regardless of how many carparks are
 # configured - registered once in async_setup, not per config entry.
 CARD_URL_PATH = f"/{DOMAIN}/pcount-card.js"
-CARD_VERSION = "1"  # bump to bust the frontend cache whenever the card changes
+CARD_VERSION = "2"  # bump to bust the frontend cache whenever the card changes
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:

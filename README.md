@@ -68,6 +68,16 @@ einer Zeile pro Sektion mit rot/grün-Balken für belegte/freie Plätze.
 Die Card wird automatisch als Frontend-Ressource registriert (kein manueller
 Eintrag unter Einstellungen → Dashboards → Ressourcen nötig).
 
+### Grafischer Editor
+
+Beim Hinzufügen der Card über die Dashboard-UI („Karte hinzufügen" → „p-count
+Parkplatz-Belegung") öffnet sich ein grafischer Editor (`ha-form`-basiert) mit
+einem Entity-Picker für die Sensoren sowie Textfeldern für Titel und
+Firmenlogo-URL – kein manuelles YAML nötig. Der YAML/UI-Code-Editor
+funktioniert weiterhin parallel.
+
+### YAML-Beispiel
+
 ```yaml
 type: custom:pcount-card
 title: Musterfirma 1
@@ -87,14 +97,11 @@ Farben lassen sich per CSS-Variablen auf Dashboard-/Theme-Ebene anpassen:
 `--pcount-card-occupied-color`, `--pcount-card-free-color`,
 `--pcount-card-label-color`.
 
-Aktuell nur per YAML/UI-Code-Editor konfigurierbar, noch kein grafischer
-Card-Editor (siehe Roadmap).
-
 ## Roadmap
 
 - [x] Grundgerüst: Config Flow, Coordinator, Sensor-Entities
 - [x] Lovelace Card (`pcount-card`), angelehnt an die p-count App
-- [ ] Grafischer Card-Editor (`getConfigElement`)
+- [x] Grafischer Card-Editor (`getConfigElement`)
 - [ ] Tests (pytest-homeassistant-custom-component)
 - [ ] Aufnahme in den offiziellen HACS-Default-Store
 - [ ] iOS-App mit CarPlay-Integration als eigenständiges Folgeprojekt

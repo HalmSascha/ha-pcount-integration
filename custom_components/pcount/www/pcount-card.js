@@ -56,6 +56,10 @@ class PCountCard extends HTMLElement {
     return 1 + (this._config?.entities?.length || 1);
   }
 
+  static getConfigElement() {
+    return document.createElement("pcount-card-editor");
+  }
+
   connectedCallback() {
     this._render();
   }
@@ -292,6 +296,94 @@ class PCountCard extends HTMLElement {
 }
 
 customElements.define("pcount-card", PCountCard);
+
+/**
+ * pcount-card-editor - grafischer Editor für die Card-Konfiguration.
+ *
+ * Nutzt das in jeder Home Assistant Frontend-Instanz global registrierte
+ * <ha-form> (kein eigener Build/Bundling-Schritt nötig, da die Card ohnehin
+ * nur innerhalb einer laufenden HA-Frontend-Session geladen wird, in der
+ * ha-form bereits als Custom Element definiert ist).
+ */
+class PCountCardEditor extends HTMLElement {
+  setConfig(config) {
+    this._config = config;
+    this._render();
+  }
+
+  set hass(hass) {
+    this._hass = hass;
+    this._render();
+  }
+
+  connectedCallback() {
+    this._render();
+  }
+
+  static get _schema() {
+    return [
+      { name: "title", selector: { text: {} } },
+      { name: "logo_url", selector: { text: {} } },
+      {
+        name: "entities",
+        selector: { entity: { domain: "sensor", multiple: true } },
+      },
+    ];
+  }
+
+  _computeLabel(schemaItem) {
+    const labels = {
+      title: "Titel (optional)",
+      logo_url: "Firmenlogo-URL (optional)",
+      entities: "Sensoren (Freie Plätze je Sektion)",
+    };
+    return labels[schemaItem.name] || schemaItem.name;
+  }
+
+  _computeHelper(schemaItem) {
+    const helpers = {
+      entities:
+        "Freie-Plätze-Sensoren der pcount-Integration, in Anzeigereihenfolge.",
+      logo_url:
+        "Wird als Banner unter der Kopfzeile angezeigt, analog zum Logo in der p-count App.",
+    };
+    return helpers[schemaItem.name] || "";
+  }
+
+  _valueChanged(ev) {
+    ev.stopPropagation();
+    const newConfig = { ...this._config, ...ev.detail.value };
+    this._config = newConfig;
+    this.dispatchEvent(
+      new CustomEvent("config-changed", {
+        detail: { config: newConfig },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
+
+  _render() {
+    if (!this._hass || !this._config) return;
+
+    if (!this._form) {
+      this.innerHTML = "";
+      this._form = document.createElement("ha-form");
+      this._form.addEventListener("value-changed", (ev) =>
+        this._valueChanged(ev)
+      );
+      this.appendChild(this._form);
+    }
+
+    this._form.hass = this._hass;
+    this._form.data = this._config;
+    this._form.schema = PCountCardEditor._schema;
+    this._form.computeLabel = this._computeLabel.bind(this);
+    this._form.computeHelper = this._computeHelper.bind(this);
+  }
+}
+
+customElements.define("pcount-card-editor", PCountCardEditor);
 
 window.customCards = window.customCards || [];
 window.customCards.push({
