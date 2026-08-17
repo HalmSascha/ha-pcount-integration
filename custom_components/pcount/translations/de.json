@@ -9,6 +9,9 @@
           "carpark_id": "Parkplatz-ID (Carpark-Slug aus deiner p-count-URL)",
           "username": "Benutzername",
           "password": "Passwort"
+        },
+        "data_description": {
+          "username": "Sofern dein Parkplatzbetreiber nichts anderes angibt, ist das identisch mit der Parkplatz-ID oben."
         }
       }
     },

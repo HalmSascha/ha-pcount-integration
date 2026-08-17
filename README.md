@@ -47,6 +47,9 @@ Parking Occupancy". The setup dialog asks for:
 | Username | Basic auth username for your instance |
 | Password | Basic auth password for your instance |
 
+Unless your parking operator tells you otherwise, the carpark ID and
+username are identical.
+
 These credentials stay entirely local in your Home Assistant configuration
 and are never shared or bundled – this integration ships without any
 preset credentials for a specific parking operator.

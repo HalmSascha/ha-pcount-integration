@@ -47,6 +47,9 @@ Parkplatz-Belegung" suchen. Im Dialog werden folgende Werte abgefragt:
 | Benutzername | Basic-Auth-Benutzername deiner Instanz |
 | Passwort | Basic-Auth-Passwort deiner Instanz |
 
+Sofern dein Parkplatzbetreiber nichts anderes angibt, sind Parkplatz-ID und
+Benutzername identisch.
+
 Diese Zugangsdaten bleiben ausschließlich lokal in deiner Home-Assistant-
 Konfiguration gespeichert und werden nirgendwo geteilt oder mitgeliefert –
 diese Integration enthält keine voreingestellten Zugangsdaten für einen
