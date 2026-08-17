@@ -8,6 +8,7 @@ from homeassistant.components.frontend import add_extra_js_url
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_HOST, CONF_PASSWORD, CONF_USERNAME, Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.typing import ConfigType
 
@@ -16,6 +17,11 @@ from .const import CONF_CARPARK_ID, DOMAIN
 from .coordinator import PCountCoordinator
 
 _LOGGER = logging.getLogger(__name__)
+
+# This integration is only ever set up via a config entry (config_flow),
+# never through YAML - tells hassfest/HA there's intentionally no
+# integration-level YAML schema to validate.
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 PLATFORMS: list[Platform] = [Platform.SENSOR]
 
