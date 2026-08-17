@@ -118,14 +118,15 @@ Farben lassen sich per CSS-Variablen auf Dashboard-/Theme-Ebene anpassen:
 
 ## Logo / Markenzeichen
 
-`icon.png` (Repo-Root) ist ein selbst gestaltetes, lizenzfreies Logo – kein
-offizielles p-count.de-Markenzeichen. HACS nutzt es automatisch als
-Vorschaubild für benutzerdefinierte Repositories. Die offizielle
-Integrations-Liste unter Einstellungen → Geräte & Dienste zeigt Icons nur
-aus [home-assistant/brands](https://github.com/home-assistant/brands) – der
-Ordner `brands/custom_integrations/pcount/` in diesem Repo ist bereits für
-diese Einreichung vorbereitet (icon.png, icon@2x.png, logo.png, logo@2x.png),
-geplant zusammen mit dem HACS-Store-Antrag weiter unten.
+Selbst gestaltetes, lizenzfreies Logo – kein offizielles
+p-count.de-Markenzeichen. Liegt direkt unter `custom_components/pcount/brand/`
+(icon.png, icon@2x.png, logo.png, logo@2x.png) und wird von Home Assistants
+[Brands Proxy API](https://github.com/home-assistant/brands) (HA ≥ 2026.3.0)
+automatisch erkannt – keine externe Einreichung, kein Warten auf einen PR,
+es taucht nach Installation/Update einfach unter Einstellungen → Geräte &
+Dienste auf. Auf älteren HA-Versionen bleibt der Icon-Platz einfach leer,
+die Integration funktioniert trotzdem. `icon.png` im Repo-Root ist dasselbe
+Bild, genutzt von HACS/GitHub als Repository-Vorschaubild.
 
 ## Roadmap
 
@@ -134,9 +135,8 @@ geplant zusammen mit dem HACS-Store-Antrag weiter unten.
 - [x] Grafischer Card-Editor (`getConfigElement`)
 - [x] Zweisprachige README (DE/EN)
 - [x] Sensor-Entity-Namen lokalisieren (Entity-Übersetzungen)
-- [x] Logo / Markenzeichen (selbst gestaltet, HACS-Fallback + Brands-Assets)
+- [x] Logo / Markenzeichen (selbst gestaltet, über die Brands Proxy API ausgeliefert)
 - [ ] Tests (pytest-homeassistant-custom-component)
-- [ ] Logo bei home-assistant/brands einreichen
 - [ ] Aufnahme in den offiziellen HACS-Default-Store
 - [ ] iOS-App mit CarPlay-Integration als eigenständiges Folgeprojekt
 

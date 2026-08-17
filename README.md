@@ -116,14 +116,15 @@ Colors can be customized per dashboard/theme via CSS variables:
 
 ## Logo / Brand Icon
 
-`icon.png` (repo root) is a self-designed, license-free logo – not an
-official p-count.de trademark. HACS picks it up automatically as a
-fallback thumbnail for custom repositories. The official Settings → Devices
-& Services integration list only shows icons sourced from
-[home-assistant/brands](https://github.com/home-assistant/brands) – the
-`brands/custom_integrations/pcount/` folder in this repo is pre-formatted
-for that submission (icon.png, icon@2x.png, logo.png, logo@2x.png), planned
-alongside the HACS default store submission below.
+Self-designed, license-free logo – not an official p-count.de trademark.
+Ships inline at `custom_components/pcount/brand/` (icon.png, icon@2x.png,
+logo.png, logo@2x.png) and is picked up automatically by Home Assistant's
+[Brands Proxy API](https://github.com/home-assistant/brands) (HA ≥
+2026.3.0) – no external submission or waiting on a PR needed, it just shows
+up in Settings → Devices & Services after installing/updating. On older HA
+cores the icon slot is simply blank; the integration still works.
+`icon.png` at the repo root is the same image, used by HACS/GitHub for the
+repository thumbnail.
 
 ## Roadmap
 
@@ -132,9 +133,8 @@ alongside the HACS default store submission below.
 - [x] Visual card editor (`getConfigElement`)
 - [x] Bilingual README (DE/EN)
 - [x] Localize sensor entity names (entity translations)
-- [x] Logo / brand icon (self-designed, HACS fallback + brands submission assets)
+- [x] Logo / brand icon (self-designed, served via the Brands Proxy API)
 - [ ] Tests (pytest-homeassistant-custom-component)
-- [ ] Submit logo to home-assistant/brands
 - [ ] Submission to the official HACS default store
 - [ ] iOS app with CarPlay integration as a separate follow-up project
 
