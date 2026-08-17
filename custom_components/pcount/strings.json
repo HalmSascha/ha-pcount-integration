@@ -20,5 +20,19 @@
     "abort": {
       "already_configured": "This carpark is already configured."
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "p-count settings",
+        "description": "How often should occupancy data be polled?",
+        "data": {
+          "scan_interval": "Poll interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "scan_interval_too_low": "The poll interval must not be lower than 30 seconds."
+    }
   }
 }

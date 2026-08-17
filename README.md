@@ -55,8 +55,13 @@ Pro Parkplatz-Sektion (laut API-Antwort, z.B. `P1+2`, `P3`) wird ein Sensor
 angelegt. Zusätzliche Attribute: `short_name`, `long_name`, `occupied_spots`,
 `measured_at`.
 
-Das Abfrageintervall startet bei 30 Sekunden und übernimmt danach den von
-der API empfohlenen Wert (`polling_seconds` in der Antwort).
+## Abfrageintervall
+
+Standardmäßig 30 Sekunden. Änderbar unter Einstellungen → Geräte & Dienste →
+p-count → Konfigurieren. Das Intervall lässt sich nicht unter 30 Sekunden
+setzen (Eingaben darunter werden im Formular mit einer Fehlermeldung
+abgelehnt) – Schutz vor versehentlicher Überlastung der API. Eine Änderung
+wirkt sofort, ohne Neustart von Home Assistant.
 
 ## Lovelace Card
 

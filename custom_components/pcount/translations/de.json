@@ -20,5 +20,19 @@
     "abort": {
       "already_configured": "Dieser Parkplatz ist bereits konfiguriert."
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "p-count Einstellungen",
+        "description": "Wie oft soll die Belegung abgefragt werden?",
+        "data": {
+          "scan_interval": "Abfrageintervall (Sekunden)"
+        }
+      }
+    },
+    "error": {
+      "scan_interval_too_low": "Das Abfrageintervall darf 30 Sekunden nicht unterschreiten."
+    }
   }
 }

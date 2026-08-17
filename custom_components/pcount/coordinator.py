@@ -9,7 +9,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import PCountApiClient, PCountApiError, PCountAuthError, PCountData
-from .const import DEFAULT_SCAN_INTERVAL
+from .const import CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL, MIN_SCAN_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -17,33 +17,32 @@ _LOGGER = logging.getLogger(__name__)
 class PCountCoordinator(DataUpdateCoordinator[PCountData]):
     """Coordinator that polls the p-count occupation endpoint.
 
-    Starts with DEFAULT_SCAN_INTERVAL and then adopts the server-provided
-    `polling_seconds` from the first successful response, so we neither
-    hammer the API nor poll needlessly slowly.
+    The poll interval is user-configurable via the options flow (default
+    DEFAULT_SCAN_INTERVAL), but is always clamped to MIN_SCAN_INTERVAL as a
+    hard floor - the options flow already rejects lower values in the UI,
+    this is just a defensive second line in case options ever get set some
+    other way (e.g. directly in storage).
     """
 
     def __init__(
         self, hass: HomeAssistant, entry: ConfigEntry, client: PCountApiClient
     ) -> None:
         self.client = client
+        scan_interval = max(
+            entry.options.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
+            MIN_SCAN_INTERVAL,
+        )
         super().__init__(
             hass,
             _LOGGER,
             name=f"pcount_{entry.entry_id}",
-            update_interval=timedelta(seconds=DEFAULT_SCAN_INTERVAL),
+            update_interval=timedelta(seconds=scan_interval),
         )
 
     async def _async_update_data(self) -> PCountData:
         try:
-            data = await self.client.async_get_data()
+            return await self.client.async_get_data()
         except PCountAuthError as err:
             raise UpdateFailed(f"Authentication error: {err}") from err
         except PCountApiError as err:
             raise UpdateFailed(f"Error communicating with API: {err}") from err
-
-        if data.polling_seconds > 0:
-            recommended = timedelta(seconds=data.polling_seconds)
-            if recommended != self.update_interval:
-                self.update_interval = recommended
-
-        return data
