@@ -34,5 +34,12 @@
     "error": {
       "scan_interval_too_low": "Das Abfrageintervall darf 30 Sekunden nicht unterschreiten."
     }
+  },
+  "entity": {
+    "sensor": {
+      "free_spots": {
+        "name": "Freie Plätze {section}"
+      }
+    }
   }
 }

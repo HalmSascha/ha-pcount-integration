@@ -33,6 +33,12 @@ async def async_setup_entry(
 class PCountFreeSpotsSensor(CoordinatorEntity[PCountCoordinator], SensorEntity):
     """Free parking spots for a single section of a p-count carpark."""
 
+    # Entity translations (see strings.json / translations/*.json,
+    # entity.sensor.free_spots) instead of a hardcoded name, so the sensor
+    # name follows each user's Home Assistant language rather than always
+    # being German.
+    _attr_has_entity_name = True
+    _attr_translation_key = "free_spots"
     _attr_native_unit_of_measurement = "spots"
     _attr_icon = "mdi:parking"
 
@@ -45,7 +51,7 @@ class PCountFreeSpotsSensor(CoordinatorEntity[PCountCoordinator], SensorEntity):
 
         section = self._section()
         display_name = section.long_name if section else section_key
-        self._attr_name = f"Freie Plätze {display_name}"
+        self._attr_translation_placeholders = {"section": display_name}
         self._attr_unique_id = f"{entry.entry_id}_{section_key}_free_spots"
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},

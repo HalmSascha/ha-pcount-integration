@@ -55,11 +55,11 @@ For each parking section reported by the API (e.g. `P1+2`, `P3`), a sensor
 entity is created with the current free-spot count. Additional attributes:
 `short_name`, `long_name`, `occupied_spots`, `measured_at`.
 
-Note: the sensor's friendly name is currently generated in German ("Freie
-Plätze \<section\>"), regardless of your Home Assistant UI language, so the
-auto-assigned entity ID looks like `sensor.freie_plaetze_p1_2` rather than an
-English equivalent. Full localization of entity names is tracked in the
-roadmap below.
+Sensor names follow your Home Assistant UI language (entity translations,
+English and German included) instead of being hardcoded – e.g. "Free spots
+P1+2" in English, "Freie Plätze P1+2" in German. The auto-assigned entity ID
+is derived once at creation time and then stays stable, even if you later
+change your language.
 
 ## Poll Interval
 
@@ -93,9 +93,14 @@ type: custom:pcount-card
 title: Musterfirma 1
 logo_url: https://example.com/logo.png
 entities:
-  - sensor.freie_plaetze_p1_2
-  - sensor.freie_plaetze_p3
+  - sensor.free_spots_p1_2   # replace with your actual entity IDs
+  - sensor.free_spots_p3
 ```
+
+Entity IDs are auto-generated at setup time from your device/carpark name
+and the sensor's translated name, so the exact values depend on your
+language and carpark ID – look them up under Settings → Devices & Services
+→ p-count → your carpark → Entities.
 
 | Option | Required | Description |
 |---|---|---|
@@ -113,7 +118,7 @@ Colors can be customized per dashboard/theme via CSS variables:
 - [x] Lovelace card (`pcount-card`), modeled after the p-count app
 - [x] Visual card editor (`getConfigElement`)
 - [x] Bilingual README (DE/EN)
-- [ ] Localize sensor entity names (currently hardcoded German)
+- [x] Localize sensor entity names (entity translations)
 - [ ] Tests (pytest-homeassistant-custom-component)
 - [ ] Submission to the official HACS default store
 - [ ] iOS app with CarPlay integration as a separate follow-up project

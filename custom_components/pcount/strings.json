@@ -34,5 +34,12 @@
     "error": {
       "scan_interval_too_low": "The poll interval must not be lower than 30 seconds."
     }
+  },
+  "entity": {
+    "sensor": {
+      "free_spots": {
+        "name": "Free spots {section}"
+      }
+    }
   }
 }

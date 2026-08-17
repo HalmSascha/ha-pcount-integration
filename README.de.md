@@ -53,9 +53,14 @@ bestimmten Parkplatzbetreiber.
 ## Bereitgestellte Entities
 
 Pro Parkplatz-Sektion (laut API-Antwort, z.B. `P1+2`, `P3`) wird ein Sensor
-`sensor.freie_plaetze_<sektion>` mit dem aktuellen Wert für freie Plätze
-angelegt. Zusätzliche Attribute: `short_name`, `long_name`, `occupied_spots`,
-`measured_at`.
+mit dem aktuellen Wert für freie Plätze angelegt. Zusätzliche Attribute:
+`short_name`, `long_name`, `occupied_spots`, `measured_at`.
+
+Der Sensor-Name folgt deiner Home-Assistant-UI-Sprache (Entity-Übersetzungen,
+Englisch und Deutsch vorhanden) statt hart codiert zu sein – z.B. „Freie
+Plätze P1+2" auf Deutsch, „Free spots P1+2" auf Englisch. Die automatisch
+vergebene Entity-ID wird einmalig bei der Erstellung festgelegt und bleibt
+danach stabil, auch wenn du später deine Sprache änderst.
 
 ## Abfrageintervall
 
@@ -90,9 +95,14 @@ type: custom:pcount-card
 title: Musterfirma 1
 logo_url: https://example.com/logo.png
 entities:
-  - sensor.freie_plaetze_p1_2
+  - sensor.freie_plaetze_p1_2   # durch deine echten Entity-IDs ersetzen
   - sensor.freie_plaetze_p3
 ```
+
+Entity-IDs werden bei der Einrichtung automatisch aus deinem Geräte-/
+Parkplatznamen und dem übersetzten Sensor-Namen generiert – die genauen
+Werte hängen also von deiner Sprache und Parkplatz-ID ab. Nachschauen unter
+Einstellungen → Geräte & Dienste → p-count → dein Parkplatz → Entitäten.
 
 | Option | Pflicht | Beschreibung |
 |---|---|---|
@@ -110,7 +120,7 @@ Farben lassen sich per CSS-Variablen auf Dashboard-/Theme-Ebene anpassen:
 - [x] Lovelace Card (`pcount-card`), angelehnt an die p-count App
 - [x] Grafischer Card-Editor (`getConfigElement`)
 - [x] Zweisprachige README (DE/EN)
-- [ ] Sensor-Entity-Namen lokalisieren (aktuell hart auf Deutsch codiert)
+- [x] Sensor-Entity-Namen lokalisieren (Entity-Übersetzungen)
 - [ ] Tests (pytest-homeassistant-custom-component)
 - [ ] Aufnahme in den offiziellen HACS-Default-Store
 - [ ] iOS-App mit CarPlay-Integration als eigenständiges Folgeprojekt
