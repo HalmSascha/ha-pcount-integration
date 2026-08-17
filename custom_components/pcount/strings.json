@@ -1,0 +1,24 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "p-count parking connection",
+        "description": "Credentials for your p-count.de parking instance. These stay local to your Home Assistant installation and are never shared.",
+        "data": {
+          "host": "Host (e.g. p-count.de)",
+          "carpark_id": "Carpark ID (carpark slug from your p-count URL)",
+          "username": "Username",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Authentication failed. Please check username and password.",
+      "cannot_connect": "Could not connect to the p-count server.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This carpark is already configured."
+    }
+  }
+}

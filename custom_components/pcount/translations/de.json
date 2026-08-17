@@ -1,0 +1,24 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "p-count Parkplatz-Verbindung",
+        "description": "Zugangsdaten für deine p-count.de Parkplatz-Instanz. Diese bleiben lokal in deiner Home-Assistant-Installation und werden nie geteilt.",
+        "data": {
+          "host": "Host (z.B. p-count.de)",
+          "carpark_id": "Parkplatz-ID (Carpark-Slug aus deiner p-count-URL)",
+          "username": "Benutzername",
+          "password": "Passwort"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Authentifizierung fehlgeschlagen. Bitte Benutzername und Passwort prüfen.",
+      "cannot_connect": "Verbindung zum p-count-Server nicht möglich.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "already_configured": "Dieser Parkplatz ist bereits konfiguriert."
+    }
+  }
+}
