@@ -4,6 +4,9 @@
 
 # p-count Parking Occupancy for Home Assistant
 
+> **Forge mirror.** The canonical repository is on [GitHub](https://github.com/HalmSascha/ha-pcount-integration); an identical mirror is kept on [Codeberg](https://codeberg.org/saschahalm/ha-pcount-integration).
+> Issues and pull requests are handled on GitHub and are disabled on the mirror. HACS installs from GitHub only, so use the GitHub URL when adding this as a custom repository.
+
 Custom integration for Home Assistant that exposes parking occupancy data
 from [p-count.de](https://p-count.de) as sensors – one "free spots" entity
 per parking section.

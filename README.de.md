@@ -4,6 +4,9 @@
 
 # p-count Parkplatz-Belegung für Home Assistant
 
+> **Spiegel auf zwei Forges.** Das maßgebliche Repository liegt auf [GitHub](https://github.com/HalmSascha/ha-pcount-integration); ein identischer Spiegel liegt auf [Codeberg](https://codeberg.org/saschahalm/ha-pcount-integration).
+> Issues und Pull Requests laufen über GitHub und sind auf dem Spiegel abgeschaltet. HACS installiert ausschließlich von GitHub – beim Hinzufügen als Custom Repository also die GitHub-Adresse verwenden.
+
 Custom Integration für Home Assistant, die Parkplatz-Belegungsdaten von
 [p-count.de](https://p-count.de) als Sensoren bereitstellt – eine „Freie
 Plätze"-Entity pro Parkplatz-Sektion.
