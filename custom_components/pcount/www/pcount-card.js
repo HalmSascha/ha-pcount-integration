@@ -204,24 +204,77 @@ class PCountCard extends HTMLElement {
     });
   }
 
+  /** Create an element with an optional class and text content. */
+  static _el(tag, className, text) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text !== undefined && text !== null) el.textContent = String(text);
+    return el;
+  }
+
+  /**
+   * Build one section row as DOM nodes.
+   *
+   * Unavailable rows show `message` in place of the bar; regular rows show
+   * the red/green occupied-vs-free bar.
+   */
+  static _row({ unavailable = false, shortName, longName, message, occupied, free }) {
+    const el = PCountCard._el;
+    const row = el("div", unavailable ? "row unavailable" : "row");
+
+    const label = el("div", "label");
+    label.append(el("span", "short", shortName));
+    if (longName !== undefined) label.append(el("span", "long", longName));
+    row.append(label);
+
+    if (unavailable) {
+      row.append(el("div", "bar", message));
+      return row;
+    }
+
+    const total = occupied + free;
+    const occupiedPct = total > 0 ? (occupied / total) * 100 : 50;
+    const freePct = total > 0 ? (free / total) * 100 : 50;
+
+    const bar = el("div", "bar");
+    const occupiedBg = el("div", "segment-bg occupied");
+    occupiedBg.style.width = `${occupiedPct}%`;
+    const freeBg = el("div", "segment-bg free");
+    freeBg.style.width = `${freePct}%`;
+    bar.append(
+      occupiedBg,
+      freeBg,
+      el("span", "segment-label occupied-label", occupied),
+      el("span", "segment-label free-label", free)
+    );
+    row.append(bar);
+    return row;
+  }
+
   _render() {
     if (!this._root || !this._hass || !this._config) return;
 
     const root = this._root;
     const entities = this._config.entities;
     let latestMeasuredAt = null;
-    const rowsHtml = [];
+    const rows = [];
 
+    // All values that do not originate from this file (entity IDs, the
+    // short/long section names from the remote p-count JSON, friendly
+    // names) are written exclusively via textContent. No markup is ever
+    // built from strings, so nothing in those values can reach the
+    // frontend as HTML.
     entities.forEach((entityId) => {
       const stateObj = this._hass.states[entityId];
 
       if (!stateObj) {
-        rowsHtml.push(`
-          <div class="row unavailable">
-            <div class="label"><span class="short">?</span></div>
-            <div class="bar">${entityId} nicht gefunden</div>
-          </div>
-        `);
+        rows.push(
+          PCountCard._row({
+            unavailable: true,
+            shortName: "?",
+            message: `${entityId} nicht gefunden`,
+          })
+        );
         return;
       }
 
@@ -244,39 +297,21 @@ class PCountCard extends HTMLElement {
         !Number.isNaN(occupied);
 
       if (!isValid) {
-        rowsHtml.push(`
-          <div class="row unavailable">
-            <div class="label">
-              <span class="short">${shortName}</span>
-              <span class="long">${longName}</span>
-            </div>
-            <div class="bar">nicht verfügbar</div>
-          </div>
-        `);
+        rows.push(
+          PCountCard._row({
+            unavailable: true,
+            shortName,
+            longName,
+            message: "nicht verfügbar",
+          })
+        );
         return;
       }
 
-      const total = occupied + free;
-      const occupiedPct = total > 0 ? (occupied / total) * 100 : 50;
-      const freePct = total > 0 ? (free / total) * 100 : 50;
-
-      rowsHtml.push(`
-        <div class="row">
-          <div class="label">
-            <span class="short">${shortName}</span>
-            <span class="long">${longName}</span>
-          </div>
-          <div class="bar">
-            <div class="segment-bg occupied" style="width:${occupiedPct}%"></div>
-            <div class="segment-bg free" style="width:${freePct}%"></div>
-            <span class="segment-label occupied-label">${occupied}</span>
-            <span class="segment-label free-label">${free}</span>
-          </div>
-        </div>
-      `);
+      rows.push(PCountCard._row({ shortName, longName, occupied, free }));
     });
 
-    root.querySelector(".rows").innerHTML = rowsHtml.join("");
+    root.querySelector(".rows").replaceChildren(...rows);
     root.querySelector(".title").textContent =
       this._config.title || this._config.name || "Parkplatz-Belegung";
 
