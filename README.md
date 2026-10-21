@@ -48,8 +48,9 @@ Copy `custom_components/pcount` into your Home Assistant
 
 ## Setup
 
-Settings → Devices & Services → Add Integration → search for "p-count
-Parking Occupancy". The setup dialog asks for:
+Settings → Devices & Services → Add Integration → search for "p-count".
+The integration is listed as "p-count Parkplatz-Belegung" in every UI
+language. The setup dialog asks for:
 
 | Field | Description |
 |---|---|
