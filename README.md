@@ -23,15 +23,23 @@ risk.
 
 ## Installation
 
-### Via HACS (recommended, once listed in the store)
+### Via HACS (recommended)
 
-Until it's accepted into the official HACS store, add it as a custom
+The integration is listed in the official HACS default store:
+
+1. Open HACS and search for "p-count"
+2. Open "p-count Parkplatz-Belegung" and select Download
+3. Restart Home Assistant
+
+### Via HACS as a custom repository (fallback)
+
+If the search does not find the integration, add it as a custom
 repository:
 
-1. HACS → Integrations → Menu (⋮) → Custom repositories
-2. URL: `https://github.com/HalmSascha/ha-pcount-integration`, category:
+1. HACS → Menu (⋮) → Custom repositories
+2. URL: `https://github.com/HalmSascha/ha-pcount-integration`, type:
    Integration
-3. Install "p-count Parking Occupancy" and restart Home Assistant
+3. Download "p-count Parkplatz-Belegung" and restart Home Assistant
 
 ### Manual
 
@@ -148,7 +156,7 @@ decisions, code, and documentation.
 - [x] Localize sensor entity names (entity translations)
 - [x] Logo / brand icon (self-designed, served via the Brands Proxy API)
 - [ ] Tests (pytest-homeassistant-custom-component)
-- [ ] Submission to the official HACS default store
+- [x] Listed in the official HACS default store
 - [ ] iOS app with CarPlay integration as a separate follow-up project
 
 ## License

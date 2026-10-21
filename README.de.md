@@ -23,15 +23,23 @@ Nutzung auf eigenes Risiko.
 
 ## Installation
 
-### Über HACS (empfohlen, sobald im Store gelistet)
+### Über HACS (empfohlen)
 
-Bis zur Aufnahme in den offiziellen HACS-Store als benutzerdefiniertes
+Die Integration ist im offiziellen HACS-Default-Store gelistet:
+
+1. HACS öffnen und nach „p-count" suchen
+2. „p-count Parkplatz-Belegung" öffnen und herunterladen
+3. Home Assistant neu starten
+
+### Über HACS als benutzerdefiniertes Repository (Fallback)
+
+Falls die Suche die Integration nicht findet, als benutzerdefiniertes
 Repository hinzufügen:
 
-1. HACS → Integrationen → Menü (⋮) → Benutzerdefinierte Repositories
-2. URL: `https://github.com/HalmSascha/ha-pcount-integration`, Kategorie:
+1. HACS → Menü (⋮) → Benutzerdefinierte Repositories
+2. URL: `https://github.com/HalmSascha/ha-pcount-integration`, Typ:
    Integration
-3. „p-count Parkplatz-Belegung" installieren und Home Assistant neu starten
+3. „p-count Parkplatz-Belegung" herunterladen und Home Assistant neu starten
 
 ### Manuell
 
@@ -150,7 +158,7 @@ Schritt vom Maintainer gesteuert und geprüft wurden.
 - [x] Sensor-Entity-Namen lokalisieren (Entity-Übersetzungen)
 - [x] Logo / Markenzeichen (selbst gestaltet, über die Brands Proxy API ausgeliefert)
 - [ ] Tests (pytest-homeassistant-custom-component)
-- [ ] Aufnahme in den offiziellen HACS-Default-Store
+- [x] Aufnahme in den offiziellen HACS-Default-Store
 - [ ] iOS-App mit CarPlay-Integration als eigenständiges Folgeprojekt
 
 ## Lizenz
