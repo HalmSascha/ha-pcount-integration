@@ -1,0 +1,48 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "p-count parking connection",
+        "description": "Credentials for your p-count.de parking instance. These stay local to your Home Assistant installation and are never shared.",
+        "data": {
+          "host": "Host (e.g. p-count.de)",
+          "carpark_id": "Carpark ID (carpark slug from your p-count URL)",
+          "username": "Username",
+          "password": "Password"
+        },
+        "data_description": {
+          "username": "Unless your parking operator tells you otherwise, this is identical to the carpark ID above."
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Authentication failed. Please check username and password.",
+      "cannot_connect": "Could not connect to the p-count server.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This carpark is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "p-count settings",
+        "description": "How often should occupancy data be polled?",
+        "data": {
+          "scan_interval": "Poll interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "scan_interval_too_low": "The poll interval must not be lower than 30 seconds."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "free_spots": {
+        "name": "Free spots {section}"
+      }
+    }
+  }
+}
